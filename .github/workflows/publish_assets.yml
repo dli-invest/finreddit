@@ -1,6 +1,11 @@
+# on:
+#   release:
+#     types: [created]
 on:
-  release:
-    types: [created]
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 name: Upload release assets after release is created
 jobs:
@@ -31,7 +36,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
-
       - name: Branch name
         id: branch_name
         run: |
@@ -39,8 +43,36 @@ jobs:
           echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
           echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
       - uses: actions/checkout@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Download build artefacts
+        # outputs all commits since last tag to file
+        # if changes.txt exist and length greater than 0
+      - name: Get Latest Commits Since Last Tag
+        run: |
+          git log $(git describe --tags --abbrev=0)..HEAD --oneline > changes.txt
+          if [ -s changes.txt ]
+          then
+              echo "Changes from last tag is"
+              cat changes.txt
+          else
+              echo "Getting Changes from git log, first tag"
+              git log > changes.txt
+          fi
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body_path: docs/changelog/latest_changes.md
+          draft: false
+          prerelease: false
+
+      - name: Download build artifacts
         uses: actions/download-artifact@v1
         with:
           name: binaries
@@ -60,4 +92,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           args: './assets/*'
