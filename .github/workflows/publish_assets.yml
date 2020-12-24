@@ -67,8 +67,8 @@ jobs:
         # if changes.txt exist and length greater than 0
       - name: Get Latest Commits Since Last Tag
         run: |
-          git log $(git describe --tags --abbrev=0)..HEAD --no-pager --oneline
-          git log $(git describe --tags --abbrev=0)..HEAD --no-pager --oneline > changes.md
+          git log $(git describe --tags --abbrev=0)..HEAD --oneline > changes.md
+          ls *.md
           if [ -s changes.md ]
           then
               echo "Changes from last tag is"
@@ -76,7 +76,7 @@ jobs:
           else
               echo "Getting Changes from git log, first tag"
               git log
-              git log --no-pager > changes.md
+              git log --oneline > changes.md
           fi
 
       - name: Create Release
