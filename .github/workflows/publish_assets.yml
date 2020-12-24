@@ -68,7 +68,7 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body_path: docs/changelog/latest_changes.md
+          body_path: changes.txt
           draft: false
           prerelease: false
 
