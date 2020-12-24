@@ -75,7 +75,6 @@ jobs:
               cat changes.md
           else
               echo "Getting Changes from git log, first tag"
-              git log
               git log --oneline > changes.md
           fi
 
