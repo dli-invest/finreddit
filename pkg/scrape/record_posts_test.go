@@ -16,6 +16,6 @@ func TestAppendToCsv(t *testing.T) {
 	}
 	
 	if testTest[0][0] == readData[0][0] {
-		
+		t.Errorf("Csv values do not match")
 	}
 }
