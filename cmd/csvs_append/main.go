@@ -4,7 +4,7 @@ import (
 	// "encoding/csv"
 	// "fmt"
 	// "os"
-	"github.com/dli-invest/finreddit/pkg/scrape"
+	"github.com/dli-invest/finreddit/pkg/csvs"
 )
 
 func main() {
@@ -20,6 +20,6 @@ func main() {
 	// }
 	// w.Flush()
 	testData := [][]string{{"col1", "col2"}, {"test1", "test2"}}
-	scrape.AppendToCsv("tasks.csv", testData)
+	csvs.AppendToCsv("tasks.csv", testData)
 	// append rows to column
 }

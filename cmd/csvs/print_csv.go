@@ -1,12 +1,12 @@
 package main
 
 import (
-    "github.com/dli-invest/finreddit/pkg/scrape"
+    "github.com/dli-invest/finreddit/pkg/csvs"
     "fmt"
 )
 // test script to illustrate csvs operations
 func main() {
-    records := scrape.ReadCsvFile("cmd/tasks.csv")
+    records := csvs.ReadCsvFile("cmd/tasks.csv")
     fmt.Println(records)
     for i, r:= range records {
         // header column igonre
