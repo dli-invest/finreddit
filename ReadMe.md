@@ -9,3 +9,10 @@ go run cmd/main.go
 ```
 
 golang should autoinstall the packages.
+
+
+To run tests
+
+```
+go test ./... -v -covermode=count
+```

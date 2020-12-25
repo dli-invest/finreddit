@@ -22,6 +22,7 @@ func GetPosts() {
 		Time: "day",
 		Limit: 1000,
 	}
+	// for every subreddit go through and get submissions
 	submissions, _ := o.SubredditSubmissions("investing", geddit.NewSubmissions, subOpts)
 	for i, s := range submissions {
 		fmt.Println(i, s)
