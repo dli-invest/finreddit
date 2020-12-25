@@ -8,6 +8,7 @@ import (
     "os"
 )
 
+// read csv from file path
 func ReadCsvFile(filePath string) [][]string {
     f, err := os.Open(filePath)
     if err != nil {
@@ -24,6 +25,7 @@ func ReadCsvFile(filePath string) [][]string {
     return records
 }
 
+// append rows to csvs
 func AppendToCsv(fileName string, data [][]string) {
     f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
@@ -38,4 +40,18 @@ func AppendToCsv(fileName string, data [][]string) {
         }
 	}
 	w.Flush()
+}
+
+// check if value exists in csv
+func FindInCsv(filePath string, searchValue string, searchColumn int) (bool) {
+    records := ReadCsvFile(filePath)
+    foundValue := false
+    for _, row:= range records {
+        valueInRow := row[searchColumn]
+        if searchValue == valueInRow {
+            foundValue = true
+            break
+        }
+	}
+    return foundValue
 }
