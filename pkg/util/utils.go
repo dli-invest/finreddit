@@ -38,7 +38,10 @@ func ValidateConfigPath(path string) error {
 // NewConfig returns a new decoded Config struct
 func NewConfig(configPath string) (*types.SearchConfig, error) {
 	// check if path is valid
-	err := ValidateConfigPath(configPath)
+    err := ValidateConfigPath(configPath)
+    if err != nil {
+        return nil, err
+    }
     // Create config structure
     config := &types.SearchConfig{}
 

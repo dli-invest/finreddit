@@ -1,0 +1,6 @@
+data:
+  subreddits:
+    - name: investing
+      limit: 100
+      minScore: 50
+      minComments: 50
