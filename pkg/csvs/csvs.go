@@ -32,7 +32,10 @@ func AppendToCsv(fileName string, data [][]string) {
 	}
     w := csv.NewWriter(f)
     for _, row:= range data {
-        w.Write(row)
+        err = w.Write(row)
+        if err != nil {
+            fmt.Println(err)
+        }
 	}
 	w.Flush()
 }
