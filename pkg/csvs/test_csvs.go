@@ -2,7 +2,6 @@ package csvs
 
 import (
     "testing"
-    "os"
 )
 
 // make read the csv read back into the file is the same
@@ -11,7 +10,10 @@ func TestAppendToCsv(t *testing.T) {
 	testData := [][]string{{"col1", "col2"}, {"test1", "test2"}}
 	AppendToCsv(filePath, testData)
 	readData := ReadCsvFile(filePath)
-	if testData != readData {
+	if testData != nil {
+        t.Errorf("Failed to get matching value")
+	}
+	if readData != nil {
         t.Errorf("Failed to get matching value")
 	}
 	
