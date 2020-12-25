@@ -8,4 +8,4 @@ To install
 go run cmd/main.go
 ```
 
-golang should autoinstall the packages
+golang should autoinstall the packages.
