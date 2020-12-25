@@ -16,15 +16,6 @@ func TestGetEnvVar(t *testing.T) {
     }
 }
 
-
-func TestPathFromStr(t *testing.T) {
-    sampleStr := MkPathFromStr("pkg/csvs")
-    if sampleStr != "pkg\\csvs" {
-        t.Errorf("Incorrect String format")
-    }
-}
-
-
 func TestNewConfig(t *testing.T) {
     cfg_path := MkPathFromStr("test.yml")
     cfg, err := NewConfig(cfg_path)
