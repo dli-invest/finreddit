@@ -1,4 +1,4 @@
-package scrape
+package csvs
 
 // csv utilties to prevent duplicate entries
 // probably manually clear out every now and then
