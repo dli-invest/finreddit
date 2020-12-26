@@ -35,4 +35,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Run job
-      run: go run
+      run: go run cmd/main.go
+
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add internal/*.csv
+        git commit -m "Updating csv"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
