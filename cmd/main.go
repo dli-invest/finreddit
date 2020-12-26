@@ -7,5 +7,5 @@ import (
 func main() {
 
 	// Ready to make API calls!
-	reddit.ScanSRs()
+	reddit.ScanSRs("scan_sr/simple.yml")
 }
