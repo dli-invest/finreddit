@@ -5,8 +5,10 @@ import (
 	"github.com/dli-invest/finreddit/pkg/util"
 	"github.com/dli-invest/finreddit/pkg/csvs"
 	"github.com/dli-invest/finreddit/pkg/types"
+	"github.com/dli-invest/finreddit/pkg/discord"
 	"github.com/jzelinskie/geddit"
 	"fmt"
+	"time"
 )
 
 
@@ -59,11 +61,35 @@ func ScanSRs(cfgPathStr string) {
 				fmt.Println("subreddit submission already set")
 				fmt.Println(s)
 			} else {
+				// seems like a lot of posts, wondering if I will hit 
+				// post limit, sleep 2 seconds after each post.
 				// append to csv
 				sData := [][]string{{srCfg.Name, s.FullID, s.URL}}
 				csvs.AppendToCsv(csvsPath, sData)
-				// send to discord
+				discordPayload := MapSubmissionToEmbed(s)
+				_, err := discord.SendWebhook(discordPayload)
+				if err != nil {
+					fmt.Println(s.FullID)
+					fmt.Println(err)
+				}
+				time.Sleep(2 * time.Second)
 			}
 		}
 	}
+}
+
+
+func MapSubmissionToEmbed(submission *geddit.Submission)  (types.DiscordPayload) {
+	description := fmt.Sprintf(
+		"%s (%d Likes, %d Comments)",
+		submission.Author,
+		submission.Score,
+		submission.NumComments)
+
+	discordEmbed := []types.DiscordEmbed{{
+		Title: submission.Title,
+		Url: submission.URL,
+		Description: description}}
+	discordPayload := types.DiscordPayload{Embeds: discordEmbed}
+	return discordPayload
 }

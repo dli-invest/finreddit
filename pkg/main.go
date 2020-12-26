@@ -28,5 +28,4 @@ func GetPosts() {
 		fmt.Println(i, s)
 		fmt.Println(s.FullID)
 	}
-	// log.Println(submissions)
 }

@@ -6,7 +6,7 @@ import (
 )
 func TestGetPosts(t *testing.T) {
 	discordEmbed := []types.DiscordEmbed{{Title: "sample title", Url: "https://github.com/FriendlyUser/finfiber/blob/master/pkg/discord/discord.go", Description: "CI/CD"}}
-	discordPayload := types.DiscordWebhook{Content: "test content", Embeds: discordEmbed}
+	discordPayload := types.DiscordPayload{Content: "test content", Embeds: discordEmbed}
 	_, err := SendWebhook(discordPayload)
 	if err != nil {
 		t.Errorf("Failed to send request")

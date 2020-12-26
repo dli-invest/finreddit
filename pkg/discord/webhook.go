@@ -9,7 +9,7 @@ import (
 	"bytes"
 )
 
-func SendWebhook(discordWebhook types.DiscordWebhook) (*http.Response, error){
+func SendWebhook(discordWebhook types.DiscordPayload) (*http.Response, error){
 	discordUrl := os.Getenv("DISCORD_WEBHOOK")
 	if discordUrl == "" {
 		log.Fatal("DISCORD_WEBHOOK not set")
@@ -20,6 +20,4 @@ func SendWebhook(discordWebhook types.DiscordWebhook) (*http.Response, error){
 	}
 	resp, err := http.Post(discordUrl, "application/json", bytes.NewBuffer(webhookData))
 	return resp, err
-	// log.Println(discordWebhook.Content) // john
-	// log.Println(discordWebhook.Embeds) // doe
 }
