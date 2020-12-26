@@ -25,6 +25,21 @@ func ReadCsvFile(filePath string) [][]string {
     return records
 }
 
+func AppendRowToCsv(fileName string, data []string) {
+    f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
+	if err != nil {
+		fmt.Println(err)
+		return
+    }
+    w := csv.NewWriter(f)
+    err = w.Write(data)
+    if err != nil {
+        fmt.Println("Append Error")
+        fmt.Println(err)
+    }
+    w.Flush()
+}
+
 // append rows to csvs
 func AppendToCsv(fileName string, data [][]string) {
     f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
@@ -36,6 +51,7 @@ func AppendToCsv(fileName string, data [][]string) {
     for _, row:= range data {
         err = w.Write(row)
         if err != nil {
+            fmt.Println("Append Error")
             fmt.Println(err)
         }
 	}
