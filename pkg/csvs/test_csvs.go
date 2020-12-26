@@ -23,11 +23,27 @@ func TestAppendToCsv(t *testing.T) {
 	}
 }
 
+func TestAppendRowToCsv(t *testing.T) {
+	filePath := "record_posts_test.csv"
+	testData := []string{"col1", "col2"}
+	AppendRowToCsv(filePath, testData)
+	readData := ReadCsvFile(filePath)
+	if testData != nil {
+        t.Errorf("Failed to get matching value")
+	}
+	if readData != nil {
+        t.Errorf("Failed to get matching value")
+	}
+	
+	if testData[0] == readData[0][0] {
+		t.Errorf("Csv values do not match")
+	}
+}
+
 func TestFindInCsv(t *testing.T) {
 	filePath := "view_values_test.csv"
 	testData := [][]string{{"col1", "col2"}, {"test11", "test12"}, {"test21", "test22"}}
 	AppendToCsv(filePath, testData)
 	valueFound := FindInCsv(filePath, "test22", 1)
 	util.AssertEqual(t, valueFound, true)
-		
 }
