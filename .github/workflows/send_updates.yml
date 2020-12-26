@@ -1,0 +1,38 @@
+on:
+  push:
+    branches:
+      - 'main'
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: '30 2 * * 6'
+
+# reddit access for golang tests
+# since I am an single dev
+# what I care about is regression
+# making sure my code still works on the reddit api
+
+env: 
+  REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+  REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+  REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+  REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+  DISCORD_WEBHOOK: ${{ secrets.DISCORD_CODE_WEBHOOK}}
+
+name: Send Updates
+jobs:
+  run:
+    strategy:
+      matrix:
+        go-version: [1.15.x]
+        platform: [ubuntu-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+    - name: Install Go
+      if: success()
+      uses: actions/setup-go@v2
+      with:
+        go-version: ${{ matrix.go-version }}
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Run job
+      run: go run
