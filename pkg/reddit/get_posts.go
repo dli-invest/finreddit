@@ -85,9 +85,9 @@ func MapSubmissionToEmbed(submission *geddit.Submission)  (types.DiscordPayload)
 		submission.Author,
 		submission.Score,
 		submission.NumComments)
-
+	title := fmt.Sprintf("%s - %s", submission.Subreddit, submission.Title)
 	discordEmbed := []types.DiscordEmbed{{
-		Title: submission.Title,
+		Title: title,
 		Url: submission.URL,
 		Description: description}}
 	discordPayload := types.DiscordPayload{Embeds: discordEmbed}
