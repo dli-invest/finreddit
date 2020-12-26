@@ -1,6 +1,6 @@
 // main function logic goes here
 package pkg
-
+// consider importing https://github.com/FriendlyUser/finfiber/blob/master/pkg/discord/discord.go
 import (
 	"log"
 	"github.com/dli-invest/finreddit/pkg/login"

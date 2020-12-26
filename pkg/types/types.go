@@ -54,5 +54,15 @@ type SearchConfig struct {
 	Data struct {
         SubReddits []SRConfig `yaml:"subreddits" json:"subreddits"`
 	} `yaml:"data" json:"data"`
+}
 
+type DiscordEmbed struct {
+	Title string `json:"title"`
+	Url string `json:"url"`
+	Description string `json:"description"`
+}
+
+type DiscordWebhook struct {
+	Content string `json:"content" xml:"content" form:"content" query:"content"`
+	Embeds []DiscordEmbed `json:"embeds" xml:"embeds" form:"embeds" query:"embeds"`
 }
