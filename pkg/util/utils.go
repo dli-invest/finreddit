@@ -59,7 +59,6 @@ func NewConfig(configPath string) (*types.SearchConfig, error) {
     if err := d.Decode(&config); err != nil {
         return nil, err
     }
-    log.Println(config)
     return config, nil
 }
 

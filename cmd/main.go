@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/dli-invest/finreddit/pkg"
+	"github.com/dli-invest/finreddit/pkg/reddit"
 )
 
 func main() {
 
 	// Ready to make API calls!
-	pkg.GetPosts()
+	reddit.ScanSRs()
 }
