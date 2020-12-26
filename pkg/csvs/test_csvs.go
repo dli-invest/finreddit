@@ -40,7 +40,6 @@ func TestAppendRowToCsv(t *testing.T) {
 	}
 }
 
-
 func TestFindInCsv(t *testing.T) {
 	filePath := "view_values_test.csv"
 	testData := [][]string{{"col1", "col2"}, {"test11", "test12"}, {"test21", "test22"}}
