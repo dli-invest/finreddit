@@ -2,9 +2,21 @@ on:
   push:
     branches:
       - '*'
+      - 'feature/*'
   pull_request:
     branches:
       - main
+
+# reddit access for golang tests
+# since I am an single dev
+# what I care about is regression
+# making sure my code still works on the reddit api
+
+env: 
+  REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+  REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+  REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+  REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
 
 name: run tests
 jobs:

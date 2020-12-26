@@ -1,0 +1,12 @@
+data:
+  subreddits:
+    - name: investing
+      limit: 100
+    - name: wallstreetbets
+      limit: 80
+      minScore: 50
+      minComments: 20
+    - name: geddittest
+      limit: 30
+      time: string
+      count: 1
