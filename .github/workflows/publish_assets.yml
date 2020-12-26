@@ -46,7 +46,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          fetch-depth: 60
+          fetch-depth: 0
 
       - name: Download build artifacts
         uses: actions/download-artifact@v1
