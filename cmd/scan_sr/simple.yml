@@ -1,9 +1,9 @@
 data:
   subreddits:
     - name: investing
-      limit: 10
-      minScore: 50
-      minComments: 50
+      limit: 15
+      minScore: 100
+      minComments: 100
     - name: econmonitor
       limit: 10
       minScore: 50
