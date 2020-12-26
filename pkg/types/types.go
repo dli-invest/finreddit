@@ -57,9 +57,9 @@ type SearchConfig struct {
 }
 
 type DiscordEmbed struct {
-	Title string `json:"title"`
-	Url string `json:"url"`
-	Description string `json:"description"`
+	Title string `json:"title,omitempty"`
+	Url string `json:"url,omitempty"`
+	Description string `json:"description,omitempty"`
 }
 
 type DiscordWebhook struct {

@@ -2,20 +2,24 @@ package discord
 
 import (
 	"os"
-	// "encoding/json"
+	"log"
+	"encoding/json"
 	"net/http"
 	"github.com/dli-invest/finreddit/pkg/types"
 	"bytes"
 )
 
-
-
-
-func SendWebhook() {
-	discordWebhook := new(types.DiscordWebhook)
+func SendWebhook(discordWebhook types.DiscordWebhook) (*http.Response, error){
 	discordUrl := os.Getenv("DISCORD_WEBHOOK")
+	if discordUrl == "" {
+		log.Fatal("DISCORD_WEBHOOK not set")
+	}
+	webhookData, err := json.Marshal(discordWebhook)
+	if err != nil {
+		log.Fatal(err)
+	}
 	resp, err := http.Post(discordUrl, "application/json", bytes.NewBuffer(webhookData))
-	log.Println(resp)
-	log.Println(discordWebhook.Content) // john
-	log.Println(discordWebhook.Embeds) // doe
+	return resp, err
+	// log.Println(discordWebhook.Content) // john
+	// log.Println(discordWebhook.Embeds) // doe
 }
