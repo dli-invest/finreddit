@@ -69,7 +69,7 @@ jobs:
         # if changes.txt exist and length greater than 0
       - name: Get Latest Commits Since Last Tag
         run: |
-          git log $(git describe --tags --abbrev=0)..HEAD --oneline > changes.md
+          git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%h %s" > changes.md
 
       - name: Create Release
         id: create_release
