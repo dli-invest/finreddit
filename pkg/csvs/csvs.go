@@ -36,6 +36,7 @@ func AppendToCsv(fileName string, data [][]string) {
     for _, row:= range data {
         err = w.Write(row)
         if err != nil {
+            fmt.Println("Append Error")
             fmt.Println(err)
         }
 	}
