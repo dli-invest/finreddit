@@ -70,15 +70,6 @@ jobs:
       - name: Get Latest Commits Since Last Tag
         run: |
           git log $(git describe --tags --abbrev=0)..HEAD --oneline > changes.md
-          ls *.md
-          if [ -s changes.md ]
-          then
-              echo "Changes from last tag is"
-              cat changes.md
-          else
-              echo "Getting Changes from git log, first tag"
-              git log --oneline > changes.md
-          fi
 
       - name: Create Release
         id: create_release
