@@ -27,7 +27,7 @@ func GetSubmissions(session *geddit.OAuthSession, cfg types.SRConfig) ([]*geddit
 	var validSubmissions = []*geddit.Submission{}
 
 	for _, submission := range submissions {
-        if(submission.NumComments > cfg.MinComments && submission.Score > cfg.MinScore) {
+        if(submission.NumComments >= cfg.MinComments && submission.Score >= cfg.MinScore) {
 			validSubmissions = append(validSubmissions, submission)
 		}
 	} 

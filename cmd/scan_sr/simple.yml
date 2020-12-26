@@ -1,6 +1,14 @@
 data:
   subreddits:
     - name: investing
-      limit: 100
+      limit: 10
       minScore: 50
       minComments: 50
+    - name: econmonitor
+      limit: 10
+      minScore: 50
+      minComments: 0
+    - name: CanadianInvestor
+      limit: 10
+      minScore: 30
+      minComments: 30
