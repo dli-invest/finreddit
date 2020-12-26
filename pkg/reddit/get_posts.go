@@ -3,6 +3,7 @@ import (
 	"log"
 	"github.com/dli-invest/finreddit/pkg/login"
 	"github.com/dli-invest/finreddit/pkg/util"
+	"github.com/dli-invest/finreddit/pkg/csvs"
 	"github.com/dli-invest/finreddit/pkg/types"
 	"github.com/jzelinskie/geddit"
 	"fmt"
@@ -45,11 +46,24 @@ func ScanSRs(cfgPathStr string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+	csvsPath := util.MkPathFromStr("internal/posts.csv")
 	for _, srCfg := range cfg.Data.SubReddits {
 		srSubmissions := GetSubmissions(o, srCfg)
 		for _, s := range srSubmissions {
-			fmt.Println(s)
+			// check if submission is in csv already
+			// aware that constantly opening the csv is inefficient
+			// but I am dealing with a reasonable amount of entires
+			hasValue := csvs.FindInCsv(csvsPath, s.FullID, 1)
+			if hasValue {
+				// if not send to discord
+				fmt.Println("subreddit submission already set")
+				fmt.Println(s)
+			} else {
+				// append to csv
+				sData := [][]string{{srCfg.Name, s.FullID, s.URL}}
+				csvs.AppendToCsv(csvsPath, sData)
+				// send to discord
+			}
 		}
 	}
 }

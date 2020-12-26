@@ -5,3 +5,9 @@
 Personal reddit scrapper for investment news.
 
 Free and open source.
+
+
+## Todo List
+
+* send data to discord
+* save posts to csvs and prevent duplicates
