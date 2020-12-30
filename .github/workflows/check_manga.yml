@@ -27,7 +27,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Run job
-      run: go run cmd/scan_sr/main.go
+      run: go run cmd/scan_sr/manga.go
 
     - name: Commit files
       id: commit
