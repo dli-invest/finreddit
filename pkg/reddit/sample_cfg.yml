@@ -1,4 +1,5 @@
 data:
+  csvPath: test.csv
   subreddits:
     - name: investing
       limit: 100

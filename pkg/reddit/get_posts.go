@@ -7,6 +7,7 @@ import (
 	"github.com/dli-invest/finreddit/pkg/types"
 	"github.com/dli-invest/finreddit/pkg/discord"
 	"github.com/jzelinskie/geddit"
+	"strings"
 	"fmt"
 	"time"
 )
@@ -27,7 +28,13 @@ func GetSubmissions(session *geddit.OAuthSession, cfg types.SRConfig) ([]*geddit
 	var validSubmissions = []*geddit.Submission{}
 
 	for _, submission := range submissions {
-        if(submission.NumComments >= cfg.MinComments && submission.Score >= cfg.MinScore) {
+		if (submission.NumComments != 0 && cfg.MinScore != 0) {
+			if(submission.NumComments >= cfg.MinComments && submission.Score >= cfg.MinScore) {
+				validSubmissions = append(validSubmissions, submission)
+			}
+		}
+		// // checking for flair
+		if (strings.Contains(submission.LinkFlairText, cfg.LinkFlairText)) {
 			validSubmissions = append(validSubmissions, submission)
 		}
 	} 
@@ -48,7 +55,7 @@ func ScanSRs(cfgPathStr string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	csvsPath := util.MkPathFromStr("internal/posts.csv")
+	csvsPath := util.MkPathFromStr(cfg.Data.CsvPath)
 	for _, srCfg := range cfg.Data.SubReddits {
 		srSubmissions := GetSubmissions(o, srCfg)
 		for _, s := range srSubmissions {

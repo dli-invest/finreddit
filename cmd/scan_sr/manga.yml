@@ -1,0 +1,9 @@
+data:
+  csvPath: internal/manga.csv
+  subreddits:
+    - name: HinowaGaCRUSH
+      limit: 100
+      linkFlairText: Chapter Release
+    - name: OnePiece
+      limit: 100
+      linkFlairText: Current Chapter

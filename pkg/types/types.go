@@ -17,8 +17,8 @@ type SRConfig struct {
 
 type SearchConfig struct {
 	Data struct {
-		CsvPath string `yaml:"csvPath" json:"csvPath"`
         SubReddits []SRConfig `yaml:"subreddits" json:"subreddits"`
+		CsvPath string `yaml:"csvPath" json:"csvPath"`
 	} `yaml:"data" json:"data"`
 }
 

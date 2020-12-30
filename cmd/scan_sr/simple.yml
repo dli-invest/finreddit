@@ -1,4 +1,5 @@
 data:
+  csvPath: internal/stocks.csv
   subreddits:
     - name: investing
       limit: 15
