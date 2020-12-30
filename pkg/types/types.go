@@ -12,10 +12,12 @@ type SRConfig struct {
     Article string `yaml:"article,omitempty" url:"article,omitempty"`
     MinScore int `yaml:"minScore,omitempty"`
     MinComments int `yaml:"minComments,omitempty"`
+	LinkFlairText string `yaml:"linkFlairText" url:"link_flair_text"`
 }
 
 type SearchConfig struct {
 	Data struct {
+		CsvPath string `yaml:"csvPath" json:"csvPath"`
         SubReddits []SRConfig `yaml:"subreddits" json:"subreddits"`
 	} `yaml:"data" json:"data"`
 }
