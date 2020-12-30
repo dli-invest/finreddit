@@ -38,13 +38,16 @@ jobs:
       run: go run cmd/main.go
 
     - name: Commit files
+      id: commit
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add internal/*.csv
         git commit -m "Updating csv"
+      continue-on-error: true
     - name: Push changes
       uses: ad-m/github-push-action@master
+      if: steps.commit.outputs.status == 'success'
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
