@@ -33,9 +33,11 @@ func GetSubmissions(session *geddit.OAuthSession, cfg types.SRConfig) ([]*geddit
 				validSubmissions = append(validSubmissions, submission)
 			}
 		}
-		// // checking for flair
-		if (strings.Contains(submission.LinkFlairText, cfg.LinkFlairText)) {
-			validSubmissions = append(validSubmissions, submission)
+		if (cfg.LinkFlairText != "") {
+			// checking for flair
+			if (strings.Contains(submission.LinkFlairText, cfg.LinkFlairText)) {
+				validSubmissions = append(validSubmissions, submission)
+			}
 		}
 	} 
 	return validSubmissions
