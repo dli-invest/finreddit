@@ -7,3 +7,12 @@ data:
     - name: OnePiece
       limit: 100
       linkFlairText: Current Chapter
+    - name: BlackClover
+      limit: 100
+      linkFlairText: Current Chapter
+    - name: AkatsukinoYona
+      limit: 100
+      linkFlairText: Chapter Discussion Thread
+    - name: GrandBlue
+      limit: 100
+      linkFlairText: Chapter Discussion
