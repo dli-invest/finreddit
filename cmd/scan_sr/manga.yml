@@ -16,3 +16,6 @@ data:
     - name: GrandBlue
       limit: 100
       linkFlairText: Chapter Discussion
+    - name: Kingdom
+      limit: 100
+      linkFlairText: Current Chapter
