@@ -19,3 +19,6 @@ data:
     - name: Kingdom
       limit: 100
       linkFlairText: Current Chapter
+    - name: OshiNoKo
+      limit: 100
+      linkFlairText: Chapter Discussion
