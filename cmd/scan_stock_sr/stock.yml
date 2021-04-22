@@ -3,15 +3,11 @@ data:
   subreddits:
     - name: CanadianInvestor
       limit: 100
-      minScore: 30
-      minComments: 30
       phrases:
         - blackberry
         - bb
     - name: wallstreetbets
       limit: 100
-      minScore: 30
-      minComments: 30
       phrases:
         - blackberry
         - bb
