@@ -2,16 +2,17 @@ data:
   csvPath: internal/stocks_sr.csv
   subreddits:
     - name: CanadianInvestor
-      limit: 10
+      limit: 100
       minScore: 30
       minComments: 30
       phrases:
         - blackberry
         - bb
     - name: wallstreetbets
-      limit: 10
+      limit: 100
       minScore: 30
       minComments: 30
       phrases:
         - blackberry
         - bb
+        - coinbase
