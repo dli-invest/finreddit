@@ -13,6 +13,7 @@ type SRConfig struct {
     MinScore int `yaml:"minScore,omitempty"`
     MinComments int `yaml:"minComments,omitempty"`
 	LinkFlairText string `yaml:"linkFlairText" url:"link_flair_text"`
+	Phrases []string `yaml:"phrases" url:"phrases"`
 }
 
 type SearchConfig struct {

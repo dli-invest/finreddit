@@ -31,12 +31,29 @@ func GetSubmissions(session *geddit.OAuthSession, cfg types.SRConfig) ([]*geddit
 		if (submission.NumComments != 0 && cfg.MinScore != 0) {
 			if(submission.NumComments >= cfg.MinComments && submission.Score >= cfg.MinScore) {
 				validSubmissions = append(validSubmissions, submission)
+				continue
 			}
 		}
 		if (cfg.LinkFlairText != "") {
 			// checking for flair
 			if (strings.Contains(submission.LinkFlairText, cfg.LinkFlairText)) {
 				validSubmissions = append(validSubmissions, submission)
+				continue
+			}
+		}
+		if (len(cfg.Phrases) != 0) {
+			// search through phrases
+			title := submission.Title
+			words := strings.Split(title, " ")
+			for _, word := range words {
+				// check matches word
+				lowerWord := strings.ToLower(word)
+				for _, phrase := range cfg.Phrases {
+					if lowerWord == phrase {
+						validSubmissions = append(validSubmissions, submission)
+						continue
+					}
+				}
 			}
 		}
 	} 

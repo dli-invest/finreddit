@@ -1,0 +1,46 @@
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: '55 4 * * *'
+
+env: 
+  REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+  REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+  REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+  REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+  DISCORD_WEBHOOK: ${{ secrets.DISCORD_REDDIT_WEBHOOK}}
+
+name: Send Updates for stonks
+jobs:
+  run:
+    strategy:
+      matrix:
+        go-version: [1.15.x]
+        platform: [ubuntu-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+    - name: Install Go
+      if: success()
+      uses: actions/setup-go@v2
+      with:
+        go-version: ${{ matrix.go-version }}
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Run job
+      run: go run cmd/scan_stock_sr/stock.go
+
+    - name: Commit files
+      id: commit
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add internal/*.csv
+        git commit -m "Updating csv"
+      continue-on-error: true
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      continue-on-error: true
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
