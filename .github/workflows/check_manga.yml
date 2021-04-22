@@ -1,7 +1,10 @@
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron: '50 7 * * *'
+    - cron: '50 * * * *'
+  push:
+    branches:
+      - main
 
 env: 
   REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}

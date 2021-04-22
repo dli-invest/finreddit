@@ -22,3 +22,15 @@ data:
     - name: OshiNoKo
       limit: 100
       linkFlairText: Chapter Discussion
+    - name: manga
+      limit: 100
+      phrases:
+        - Kaguya Wants
+        - Survival Story
+        - Northern Blade
+        - Surreal Sword
+        - Kumo Desu ga
+        - Peerless Dad
+        - Boruto
+        - Dragon ball
+        - Solo Leveling

@@ -43,16 +43,15 @@ func GetSubmissions(session *geddit.OAuthSession, cfg types.SRConfig) ([]*geddit
 		}
 		if (len(cfg.Phrases) != 0) {
 			// search through phrases
-			title := submission.Title
-			words := strings.Split(title, " ")
-			for _, word := range words {
+			title := strings.ToLower(submission.Title)
 				// check matches word
-				lowerWord := strings.ToLower(word)
-				for _, phrase := range cfg.Phrases {
-					if lowerWord == phrase {
-						validSubmissions = append(validSubmissions, submission)
-						continue
-					}
+			for _, phrase := range cfg.Phrases {
+				// check if phrase is contained in title
+				lowerPhrase := strings.ToLower(phrase)
+				addSubmission := strings.Contains(title, lowerPhrase)
+				if addSubmission {
+					validSubmissions = append(validSubmissions, submission)
+					continue
 				}
 			}
 		}
