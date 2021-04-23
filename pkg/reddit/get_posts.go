@@ -8,7 +8,6 @@ import (
 	"github.com/dli-invest/finreddit/pkg/discord"
 	"github.com/jzelinskie/geddit"
 	"strings"
-	"strconv"
 	"fmt"
 	"time"
 )
