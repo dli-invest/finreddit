@@ -27,6 +27,7 @@ type DiscordEmbed struct {
 	Title string `json:"title,omitempty"`
 	Url string `json:"url,omitempty"`
 	Description string `json:"description,omitempty"`
+	Timestamp string `json:"timestamp,omitempty"`
 }
 
 type DiscordPayload struct {

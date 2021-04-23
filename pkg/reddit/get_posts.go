@@ -8,6 +8,7 @@ import (
 	"github.com/dli-invest/finreddit/pkg/discord"
 	"github.com/jzelinskie/geddit"
 	"strings"
+	"strconv"
 	"fmt"
 	"time"
 )
@@ -110,11 +111,17 @@ func MapSubmissionToEmbed(submission *geddit.Submission)  (types.DiscordPayload)
 		submission.Author,
 		submission.Score,
 		submission.NumComments)
+	// get timestamp 
+	var dateCreated int64 = int64(submission.DateCreated)
+	t := time.Unix(dateCreated, 0)
+	timestamp := t.Format(time.RFC3339)
 	title := fmt.Sprintf("%s - %s", submission.Subreddit, submission.Title)
 	discordEmbed := []types.DiscordEmbed{{
 		Title: title,
 		Url: submission.URL,
-		Description: description}}
+		Description: description,
+		Timestamp: timestamp,
+	}}
 	discordPayload := types.DiscordPayload{Embeds: discordEmbed}
 	return discordPayload
 }
