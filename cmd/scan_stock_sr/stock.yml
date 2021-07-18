@@ -12,3 +12,6 @@ data:
         - blackberry
         - bb
         - coinbase
+    - name: wallstreetbets
+      limit: 5
+      linkFlairText: Earnings Thread
