@@ -11,7 +11,8 @@ data:
       phrases:
         - blackberry
         - bb
-        - coinbase
+        - evergrande
+        - tnt
     - name: wallstreetbets
       limit: 5
       linkFlairText: Earnings Thread
