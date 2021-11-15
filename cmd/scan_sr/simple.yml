@@ -13,3 +13,12 @@ data:
       limit: 10
       minScore: 30
       minComments: 30
+    - name: Baystreetbets
+      limit: 10
+      minScore: 40
+      minComments: 10
+    - name: economics
+      limit: 5
+      minScore: 100
+      minComments: 20
+  
