@@ -13,6 +13,11 @@ data:
         - bb
         - evergrande
         - tnt
+        - dd
+        - due
+        - diligence
+        - zim
+        - all
     - name: wallstreetbets
       limit: 5
       linkFlairText: Earnings Thread
