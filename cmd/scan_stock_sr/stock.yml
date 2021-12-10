@@ -19,3 +19,6 @@ data:
     - name: wallstreetbets
       limit: 5
       linkFlairText: Earnings Thread
+    - name: Baystreetbets
+      limit: 5
+      linkFlairText: DD
