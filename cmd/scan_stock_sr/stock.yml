@@ -26,6 +26,7 @@ data:
       limit: 10
       minScore: 20
       minComments: 20
+      linkFlairText: Fundamentals/DD
       phrases:
         - Most Anticipated Earnings Releases
         - Market close -
