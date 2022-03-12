@@ -22,3 +22,10 @@ data:
     - name: Baystreetbets
       limit: 5
       linkFlairText: DD
+    - name: StockMarket
+      limit: 10
+      minScore: 20
+      minComments: 20
+      phrases:
+        - Most Anticipated Earnings Releases
+        - Market close -
