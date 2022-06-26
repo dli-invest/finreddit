@@ -32,3 +32,8 @@ data:
         - Most Anticipated Earnings Releases
         - Wall Street Week Ahead
         - Market close -
+
+    - name: wallstreetbets
+      limit: 10
+      minScore: 1000
+      minComments: 200
