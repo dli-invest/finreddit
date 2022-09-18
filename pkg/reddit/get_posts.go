@@ -21,6 +21,9 @@ func GetSubmissions(session *geddit.OAuthSession, cfg types.SRConfig) []*geddit.
 	subOpts := geddit.ListingOptions{
 		Limit: limit,
 	}
+	if cfg.After != "" {
+		subOpts.After = cfg.After
+	}
 	submissions, err := session.SubredditSubmissions(subreddit, geddit.NewSubmissions, subOpts)
 	if err != nil {
 		log.Fatal("Failed to retrieve subreddit posts for " + subreddit)
@@ -77,7 +80,7 @@ func ScanSRs(cfgPathStr string) {
 	csvsPath := util.MkPathFromStr(cfg.Data.CsvPath)
 	// print header row only used when
 	if cfg.Data.NoMessage {
-		fmt.Printf("%s,%s,%s,%s,%s\n", "subreddit", "url", "title", "author", "linkFlairText", "date")
+		fmt.Printf("%s,%s,%s,%s,%s,%s\n", "subreddit", "url", "title", "author", "linkFlairText", "date")
 	}
 	for _, srCfg := range cfg.Data.SubReddits {
 		srSubmissions := GetSubmissions(o, srCfg)
