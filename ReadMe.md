@@ -1,4 +1,4 @@
-[![codecov](https://codecov.io/gh/dli-invest/finreddit/branch/main/graph/badge.svg?token=k4Nt2zoxXk)](https://codecov.io/gh/dli-invest/finreddit)
+[![codecov](https://codecov.io/gh/dli-invest/finreddit/branch/main/graph/badge.svg?token=k4Nt2zoxXk)](https://codecov.io/gh/dli-invest/finreddit) [![Go Reference](https://pkg.go.dev/badge/dli-invest/finreddit.svg)](https://pkg.go.dev/dli-invest/finreddit)
 
 ## Finreddit
 
