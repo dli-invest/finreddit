@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/dli-invest/finreddit/branch/main/graph/badge.svg?token=k4Nt2zoxXk)](https://codecov.io/gh/dli-invest/finreddit)
+
 ## Finreddit
 
 Simple reddit bot to scrap stock based subreddit posts based on simple criteria.

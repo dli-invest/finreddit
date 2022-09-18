@@ -19,6 +19,11 @@ data:
     - name: wallstreetbets
       limit: 5
       linkFlairText: Earnings Thread
+    - name: wallstreetbets
+      limit: 10
+      minScore: 15
+      minComments: 15
+      linkFlairText: DD
     - name: Baystreetbets
       limit: 5
       linkFlairText: DD

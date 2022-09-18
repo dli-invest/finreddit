@@ -1,20 +1,21 @@
-package reddit 
+package reddit
+
 import (
-	"log"
-	"github.com/dli-invest/finreddit/pkg/login"
-	"github.com/dli-invest/finreddit/pkg/util"
-	"github.com/dli-invest/finreddit/pkg/csvs"
-	"github.com/dli-invest/finreddit/pkg/types"
-	"github.com/dli-invest/finreddit/pkg/discord"
-	"github.com/jzelinskie/geddit"
-	"strings"
 	"fmt"
+	"log"
+	"strings"
 	"time"
+
+	"github.com/dli-invest/finreddit/pkg/csvs"
+	"github.com/dli-invest/finreddit/pkg/discord"
+	"github.com/dli-invest/finreddit/pkg/login"
+	"github.com/dli-invest/finreddit/pkg/types"
+	"github.com/dli-invest/finreddit/pkg/util"
+	"github.com/jzelinskie/geddit"
 )
 
-
 // gets submissions a given SRConfiguration
-func GetSubmissions(session *geddit.OAuthSession, cfg types.SRConfig) ([]*geddit.Submission) {
+func GetSubmissions(session *geddit.OAuthSession, cfg types.SRConfig) []*geddit.Submission {
 	subreddit := cfg.Name
 	limit := cfg.Limit
 	subOpts := geddit.ListingOptions{
@@ -28,23 +29,23 @@ func GetSubmissions(session *geddit.OAuthSession, cfg types.SRConfig) ([]*geddit
 	var validSubmissions = []*geddit.Submission{}
 
 	for _, submission := range submissions {
-		if (submission.NumComments != 0 && cfg.MinScore != 0) {
-			if(submission.NumComments >= cfg.MinComments && submission.Score >= cfg.MinScore) {
+		if submission.NumComments != 0 && cfg.MinScore != 0 {
+			if submission.NumComments >= cfg.MinComments && submission.Score >= cfg.MinScore {
 				validSubmissions = append(validSubmissions, submission)
 				continue
 			}
 		}
-		if (cfg.LinkFlairText != "") {
+		if cfg.LinkFlairText != "" {
 			// checking for flair
-			if (strings.Contains(submission.LinkFlairText, cfg.LinkFlairText)) {
+			if strings.Contains(submission.LinkFlairText, cfg.LinkFlairText) {
 				validSubmissions = append(validSubmissions, submission)
 				continue
 			}
 		}
-		if (len(cfg.Phrases) != 0) {
+		if len(cfg.Phrases) != 0 {
 			// search through phrases
 			title := strings.ToLower(submission.Title)
-				// check matches word
+			// check matches word
 			for _, phrase := range cfg.Phrases {
 				// check if phrase is contained in title
 				lowerPhrase := strings.ToLower(phrase)
@@ -55,7 +56,7 @@ func GetSubmissions(session *geddit.OAuthSession, cfg types.SRConfig) ([]*geddit
 				}
 			}
 		}
-	} 
+	}
 	return validSubmissions
 }
 
@@ -74,6 +75,10 @@ func ScanSRs(cfgPathStr string) {
 		log.Fatal(err)
 	}
 	csvsPath := util.MkPathFromStr(cfg.Data.CsvPath)
+	// print header row only used when
+	if cfg.Data.NoMessage {
+		fmt.Printf("%s,%s,%s,%s,%s\n", "subreddit", "url", "title", "author", "linkFlairText", "date")
+	}
 	for _, srCfg := range cfg.Data.SubReddits {
 		srSubmissions := GetSubmissions(o, srCfg)
 		for _, s := range srSubmissions {
@@ -82,44 +87,47 @@ func ScanSRs(cfgPathStr string) {
 			// but I am dealing with a reasonable amount of entires
 			hasValue := csvs.FindInCsv(csvsPath, s.FullID, 1)
 			if hasValue {
-				// if not send to discord
-				fmt.Println("subreddit submission already set")
-				fmt.Println(s)
+				// no value, do nothing here
 			} else {
-				// seems like a lot of posts, wondering if I will hit 
+				// seems like a lot of posts, wondering if I will hit
 				// post limit, sleep 2 seconds after each post.
 				// append to csv
 				sData := [][]string{{srCfg.Name, s.FullID, s.URL}}
 				csvs.AppendToCsv(csvsPath, sData)
-				discordPayload := MapSubmissionToEmbed(s)
-				_, err := discord.SendWebhook(discordPayload)
-				if err != nil {
-					fmt.Println(s.FullID)
-					fmt.Println(err)
+				if cfg.Data.NoMessage {
+					// output this as a csv for parsing in other programs
+					// fmt.Println("Not sending to subreddit")
+					fmt.Printf("%s,%s,%s,%s,%s,%f\n", s.Subreddit, s.FullPermalink(), s.Title, s.Author, s.LinkFlairText, s.DateCreated)
+				} else {
+					discordPayload := MapSubmissionToEmbed(s)
+					_, err := discord.SendWebhook(discordPayload)
+					if err != nil {
+						fmt.Println(s.FullID)
+						fmt.Println(err)
+					}
+					time.Sleep(2 * time.Second)
 				}
-				time.Sleep(2 * time.Second)
 			}
 		}
 	}
 }
 
-
-func MapSubmissionToEmbed(submission *geddit.Submission)  (types.DiscordPayload) {
+func MapSubmissionToEmbed(submission *geddit.Submission) types.DiscordPayload {
 	description := fmt.Sprintf(
 		"%s (%d Likes, %d Comments)",
 		submission.Author,
 		submission.Score,
 		submission.NumComments)
-	// get timestamp 
+	// get timestamp
 	var dateCreated int64 = int64(submission.DateCreated)
 	t := time.Unix(dateCreated, 0)
 	timestamp := t.Format(time.RFC3339)
 	title := fmt.Sprintf("%s - %s", submission.Subreddit, submission.Title)
 	discordEmbed := []types.DiscordEmbed{{
-		Title: title,
-		Url: submission.URL,
+		Title:       title,
+		Url:         submission.URL,
 		Description: description,
-		Timestamp: timestamp,
+		Timestamp:   timestamp,
 	}}
 	discordPayload := types.DiscordPayload{Embeds: discordEmbed}
 	return discordPayload
