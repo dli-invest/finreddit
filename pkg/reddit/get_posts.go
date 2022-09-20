@@ -80,7 +80,7 @@ func ScanSRs(cfgPathStr string) {
 	csvsPath := util.MkPathFromStr(cfg.Data.CsvPath)
 	// print header row only used when
 	if cfg.Data.NoMessage {
-		fmt.Printf("%s,%s,%s,%s,%s,%s\n", "subreddit", "url", "title", "author", "linkFlairText", "date")
+		fmt.Printf("%s\t%s\t%s\t%s\t%s\t%s\n", "subreddit", "url", "title", "author", "linkFlairText", "date")
 	}
 	for _, srCfg := range cfg.Data.SubReddits {
 		srSubmissions := GetSubmissions(o, srCfg)
@@ -100,7 +100,7 @@ func ScanSRs(cfgPathStr string) {
 				if cfg.Data.NoMessage {
 					// output this as a csv for parsing in other programs
 					// fmt.Println("Not sending to subreddit")
-					fmt.Printf("%s,%s,%s,%s,%s,%f\n", s.Subreddit, s.FullPermalink(), s.Title, s.Author, s.LinkFlairText, s.DateCreated)
+					fmt.Printf("%s\t%s\t%s\t%s\t%s\t%f\n", s.Subreddit, s.FullPermalink(), s.Title, s.Author, s.LinkFlairText, s.DateCreated)
 				} else {
 					discordPayload := MapSubmissionToEmbed(s)
 					_, err := discord.SendWebhook(discordPayload)

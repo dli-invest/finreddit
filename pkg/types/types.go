@@ -18,9 +18,10 @@ type SRConfig struct {
 
 type SearchConfig struct {
 	Data struct {
-		SubReddits []SRConfig `yaml:"subreddits" json:"subreddits"`
-		CsvPath    string     `yaml:"csvPath" json:"csvPath"`
-		NoMessage  bool       `yaml:"noMessage" url:"noMessage,omitempty"` //
+		SubReddits    []SRConfig `yaml:"subreddits" json:"subreddits"`
+		CsvPath       string     `yaml:"csvPath" json:"csvPath"`
+		NoMessage     bool       `yaml:"noMessage" url:"noMessage,omitempty"` //
+		NoMessageFile string     `yaml:"noMessageFile" url:"noMessage,omitempty"`
 	} `yaml:"data" json:"data"`
 }
 
