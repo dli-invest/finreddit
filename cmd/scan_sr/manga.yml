@@ -1,10 +1,6 @@
 data:
   csvPath: internal/manga.csv
   subreddits:
-      # HinowaGaCrush has ended
-    - name: HinowaGaCRUSH
-      limit: 100
-      linkFlairText: Chapter Release
     - name: OnePiece
       limit: 100
       linkFlairText: Current Chapter
