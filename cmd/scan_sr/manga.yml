@@ -19,6 +19,9 @@ data:
     - name: OshiNoKo
       limit: 100
       linkFlairText: Chapter Discussion
+    - name: BlueBox
+      limit: 100
+      linkFlairText: Manga megathread
     - name: manga
       limit: 100
       phrases:
