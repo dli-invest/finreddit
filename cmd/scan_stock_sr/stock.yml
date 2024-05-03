@@ -20,6 +20,10 @@ data:
       limit: 5
       linkFlairText: Earnings Thread
     - name: wallstreetbets
+      limit: 100
+      phrases:
+        - Most Anticipated Earnings Releases for the week beginning
+    - name: wallstreetbets
       limit: 10
       minScore: 15
       minComments: 15
