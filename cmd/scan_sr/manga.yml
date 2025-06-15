@@ -22,6 +22,11 @@ data:
     - name: BlueBox
       limit: 100
       linkFlairText: Manga megathread
+    - name: MatoSeiheiNoSlave
+      limit: 100
+      phrases:
+        - Mato Seihei no Slave - Chapter
+        - Chapter
     - name: manga
       limit: 100
       phrases:
