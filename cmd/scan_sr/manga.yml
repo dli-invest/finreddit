@@ -21,9 +21,6 @@ data:
     - name: BlueBox
       limit: 100
       linkFlairText: Manga megathread
-    - name: 
-      limit: 100
-
     - name: MatoSeiheiNoSlave
       limit: 100
       phrases:
