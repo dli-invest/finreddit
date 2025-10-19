@@ -15,13 +15,15 @@ data:
       linkFlairText: Chapter Discussion
     - name: Kingdom
       limit: 100
-      linkFlairText: Current Chapter
-    - name: OshiNoKo
-      limit: 100
-      linkFlairText: Chapter Discussion
+      phrases:
+        - Kingdom Chapter
+        - Latest Chapter
     - name: BlueBox
       limit: 100
       linkFlairText: Manga megathread
+    - name: 
+      limit: 100
+
     - name: MatoSeiheiNoSlave
       limit: 100
       phrases:
